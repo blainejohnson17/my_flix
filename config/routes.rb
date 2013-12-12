@@ -22,5 +22,12 @@ Myflix::Application.routes.draw do
   post 'drag_sort', to: 'queue_items#drag_sort'
   post 'update_rating', to: 'queue_items#update_rating'
 
+  resources :forgot_passwords, only: [:create]
+  get 'forgot_password', to: 'forgot_passwords#new'
+  get 'forgot_password_confirmation', to: 'forgot_passwords#confirm'
+
+  resources :password_resets, only: [:show, :create]
+  get 'expired_token', to: 'password_resets#expired_token'
+  
   get 'ui(/:action)', controller: 'ui'
 end

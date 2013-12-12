@@ -9,6 +9,11 @@ describe User do
   it { should have_many(:reviews).order('created_at DESC').dependent(:destroy) }
   it { should have_secure_password }
 
+  it "generates a random token when a user is created" do
+    bob = Fabricate(:user)
+    expect(bob.token).to be_present
+  end
+
   describe "#queued_video?" do
 
     it "should return true when the video is in the users queue" do
