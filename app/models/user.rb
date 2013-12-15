@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
   has_many :queue_items, order: 'position', dependent: :destroy
   has_many :reviews, order: 'created_at DESC', dependent: :destroy
-  has_many :leading_relationships, class_name: "Relationship", :foreign_key => "leader_id"
-  has_many :followers, through: :leading_relationships, source: :follower
-  has_many :following_relationships, class_name: "Relationship", :foreign_key => "follower_id"
-  has_many :leaders, through: :following_relationships, source: :leader
+  has_many :leading_relationships, class_name: "Relationship", :foreign_key => "leader_id", dependent: :destroy
+  has_many :followers, through: :leading_relationships
+  has_many :following_relationships, class_name: "Relationship", :foreign_key => "follower_id", dependent: :destroy
+  has_many :leaders, through: :following_relationships
 
   validates :email, presence: true, uniqueness: true
   validates :full_name, presence: true
