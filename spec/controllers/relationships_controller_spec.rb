@@ -4,21 +4,25 @@ describe RelationshipsController do
 
   describe "GET #index" do
 
+    it_behaves_like "require sign in" do
+      let(:action) { get :index }
+    end
+
     it "sets @relationships to current users following relationships" do
       set_current_user
       relationship = Fabricate(:relationship, leader: Fabricate(:user), follower: current_user)
       get :index
       expect(assigns(:relationships)).to eq([relationship])
     end
-
-    it_behaves_like "require_sign_in" do
-      let(:action) { get :index }
-    end
   end
 
   describe "DELETE #destroy" do
 
     before { set_current_user }
+
+    it_behaves_like "require sign in" do
+      let(:action) { delete :destroy, id: 3 }
+    end
 
     it "redirects to the people page" do
       relationship = Fabricate(:relationship, leader: Fabricate(:user), follower: current_user)
@@ -39,10 +43,6 @@ describe RelationshipsController do
       delete :destroy, id: relationship.id
       expect(Relationship.count).to eq(1)
     end
-
-    it_behaves_like "require_sign_in" do
-      let(:action) { get :index }
-    end
   end
 
   describe "POST #create" do
@@ -50,6 +50,10 @@ describe RelationshipsController do
     let(:leader) { Fabricate(:user) }
 
     before { set_current_user }
+
+    it_behaves_like "require sign in" do
+      let(:action) { post :create, leader_id: 3 }
+    end
 
     it "redirects to the people page" do
       post :create, leader_id: leader.id
@@ -80,10 +84,6 @@ describe RelationshipsController do
       Fabricate(:relationship, leader: leader, follower: current_user)
       post :create, leader_id: leader
       expect(Relationship.count).to eq(1)
-    end
-
-    it_behaves_like "require_sign_in" do
-      let(:action) { get :index }
     end
   end
 end

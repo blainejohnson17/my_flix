@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_filter :require_user, only: [:show]
+  before_filter :require_sign_out, only: [:new, :create, :new_with_invitation_token]
+
   def show
     @user = User.find(params[:id])
   end
@@ -28,6 +30,7 @@ class UsersController < ApplicationController
 
   def new_with_invitation_token
     invitation = Invitation.find_by_token(params[:invitation_token])
+    
     if invitation
       @user = User.new(email: invitation.recipient_email)
       render :new

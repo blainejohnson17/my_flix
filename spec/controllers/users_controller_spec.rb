@@ -2,7 +2,24 @@ require 'spec_helper'
 
 describe UsersController do
 
+  describe "GET #show" do
+    
+    it_behaves_like "require sign in" do
+      let(:action) { get :show, id: 2 }
+    end
+    
+    it "assigns the requested user to @user" do
+      set_current_user
+      get :show, id: current_user.id
+      expect(assigns(:user)).to eq(current_user)
+    end
+  end
+
   describe "GET #new" do
+
+    it_behaves_like "require sign out" do
+      let(:action) { get :new }
+    end
 
     it "assigns new User to @user" do
       get :new
@@ -11,6 +28,10 @@ describe UsersController do
   end
 
   describe "POST #create" do
+
+    it_behaves_like "require sign out" do
+      let(:action) { post :create }
+    end
 
     context "with valid input and no invitation token" do
       
@@ -110,20 +131,11 @@ describe UsersController do
     end
   end
 
-  describe "GET #show" do
-    
-    it_behaves_like "require_sign_in" do
-      let(:action) { get :show, id: 2 }
-    end
-    
-    it "assigns the requested user to @user" do
-      set_current_user
-      get :show, id: current_user.id
-      expect(assigns(:user)).to eq(current_user)
-    end
-  end
-
   describe "GET #new_with_invitation_token" do
+
+    it_behaves_like "require sign out" do
+      let(:action) { get :new_with_invitation_token, invitation_token: 3 }
+    end
 
     context "with valid invitation token" do
 

@@ -4,21 +4,21 @@ describe InvitationsController do
 
   describe "GET #new" do
 
+    it_behaves_like "require sign in" do
+      let(:action) { get :new }
+    end
+
     it "sets @invitation to a new invitation" do
       set_current_user
       get :new
       expect(assigns(:invitation)).to be_new_record
       expect(assigns(:invitation)).to be_instance_of Invitation
     end
-
-    it_behaves_like "require_sign_in" do
-      let(:action) { get :new }
-    end
   end
 
   describe "POST #create" do
 
-    it_behaves_like "require_sign_in" do
+    it_behaves_like "require sign in" do
       let(:action) { post :create }
     end
 
@@ -50,33 +50,38 @@ describe InvitationsController do
     end
 
     context "with invalid input" do
-      after { ActionMailer::Base.deliveries.clear }
+
+      before { ActionMailer::Base.deliveries.clear }
+
       it "render the new template" do
         set_current_user
         post :create, invitation: { recipient_name: "Joe", recipient_email: "joe@example.com" }
         expect(response).to render_template :new
       end
+
       it "does not create an invitation" do
         set_current_user
         post :create, invitation: { recipient_name: "Joe", recipient_email: "joe@example.com" }
         expect(Invitation.count).to eq(0)
       end
+
       it "does not send an email" do
         set_current_user
         post :create, invitation: { recipient_name: "Joe", recipient_email: "joe@example.com" }
         expect(ActionMailer::Base.deliveries).to be_empty
       end
+
       it "sets the flash error message" do
         set_current_user
         post :create, invitation: { recipient_name: "Joe", recipient_email: "joe@example.com" }
         expect(flash[:error]).to be_present
       end
+
       it "sets @invitation" do
         set_current_user
         post :create, invitation: { recipient_name: "Joe", recipient_email: "joe@example.com" }
         expect(assigns(:invitation)).to be_present
       end
     end
-
   end
 end
