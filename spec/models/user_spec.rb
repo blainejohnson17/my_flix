@@ -13,9 +13,8 @@ describe User do
   it { should have_many(:following_relationships).class_name('Relationship').with_foreign_key('follower_id').dependent(:destroy) }
   it { should have_secure_password }
 
-  it "generates a random token when a user is created" do
-    bob = Fabricate(:user)
-    expect(bob.token).to be_present
+  it_behaves_like "tokenable" do
+    let(:object) { Fabricate(:user) }
   end
 
   describe "#queued_video?" do
