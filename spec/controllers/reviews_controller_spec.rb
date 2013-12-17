@@ -8,6 +8,10 @@ describe ReviewsController do
 
     let(:video) { Fabricate(:video) }
 
+    it_behaves_like "require sign in" do
+      let(:action) { post :create, review: Fabricate.attributes_for(:review), video_id: 3 }
+    end
+
     context "with valid input" do
 
       before { post :create, review: Fabricate.attributes_for(:review), video_id: video.id }
@@ -60,10 +64,6 @@ describe ReviewsController do
         post :create, review: {rating: "i"}, video_id: video.id
         expect(flash[:error]).not_to be_blank
       end
-    end
-
-    it_behaves_like "require_sign_in" do
-      let(:action) { post :create, review: Fabricate.attributes_for(:review), video_id: video.id }
     end
   end
 end

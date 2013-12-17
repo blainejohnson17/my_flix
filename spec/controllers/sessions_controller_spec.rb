@@ -4,6 +4,10 @@ describe SessionsController do
   
   describe "GET #new" do
 
+    it_behaves_like "require sign out" do
+      let(:action) { get :new }
+    end
+
     it "redirects to home page for athenticated users" do
       session[:user_id] = Fabricate(:user).id
       get :new
@@ -19,7 +23,11 @@ describe SessionsController do
   describe "POST #create" do
 
     let(:bob) { Fabricate(:user) }
-    
+
+    it_behaves_like "require sign out" do
+      let(:action) { post :create }
+    end    
+
     context "with valid credentials" do
 
       before { post :create, email: bob.email, password: bob.password }

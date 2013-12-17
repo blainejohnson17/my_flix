@@ -7,11 +7,14 @@ describe User do
   it { should validate_presence_of(:password) }
   it { should have_many(:queue_items).order(:position).dependent(:destroy) }
   it { should have_many(:reviews).order('created_at DESC').dependent(:destroy) }
+  it { should have_many(:leading_relationships).class_name('Relationship').with_foreign_key('leader_id').dependent(:destroy) }
+  it { should have_many(:followers).through(:leading_relationships) }
+  it { should have_many(:leaders).through(:following_relationships) }
+  it { should have_many(:following_relationships).class_name('Relationship').with_foreign_key('follower_id').dependent(:destroy) }
   it { should have_secure_password }
 
-  it "generates a random token when a user is created" do
-    bob = Fabricate(:user)
-    expect(bob.token).to be_present
+  it_behaves_like "tokenable" do
+    let(:object) { Fabricate(:user) }
   end
 
   describe "#queued_video?" do

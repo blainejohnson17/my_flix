@@ -9,6 +9,10 @@ describe QueueItemsController do
     let!(:queue_item1) { Fabricate(:queue_item, position: 1, user: current_user) }
     let!(:queue_item2) { Fabricate(:queue_item, position: 2, user: current_user) }
 
+    it_behaves_like "require sign in" do
+      let(:action) { get :index }
+    end
+
     it "assigns all queue_items to @queue_items for authenticated user" do
       get :index
       expect(assigns(:queue_items)).to match_array([queue_item1, queue_item2])
@@ -18,15 +22,15 @@ describe QueueItemsController do
       get :index
       expect(assigns(:queue_items)).to eq([queue_item1, queue_item2])
     end
-
-    it_behaves_like "require_sign_in" do
-      let(:action) { get :index }
-    end
   end
 
   describe "POST #create" do
 
     let(:gooneys) { video = Fabricate(:video) }
+
+    it_behaves_like "require sign in" do
+      let(:action) { post :create }
+    end
 
     it "redirects to the my queue page" do
       post :create, video_id: gooneys.id
@@ -61,13 +65,13 @@ describe QueueItemsController do
       post :create, video_id: gooneys.id
       expect(current_user.queue_items.count).to eq(1)
     end
-
-    it_behaves_like "require_sign_in" do
-      let(:action) { post :create, video_id: 1 }
-    end
   end
 
   describe "DELETE #destroy" do
+
+    it_behaves_like "require sign in" do
+      let(:action) { delete :destroy, id: 1 }
+    end
 
     it "redirects to my_queue page" do
       queue_item = Fabricate(:queue_item, user: current_user)
@@ -94,16 +98,16 @@ describe QueueItemsController do
       delete :destroy, id: queue_item1.id
       expect(QueueItem.first.position).to eq(1)
     end
-
-    it_behaves_like "require_sign_in" do
-      let(:action) { delete :destroy, id: 1 }
-    end
   end
 
   describe "POST #update_queue" do
     
     let!(:queue_item1) { Fabricate(:queue_item, position: 1, user: current_user) }
     let!(:queue_item2) { Fabricate(:queue_item, position: 2, user: current_user) }
+
+    it_behaves_like "require sign in" do
+      let(:action) { post :update_queue }
+    end
 
     context "with complete input" do
       
@@ -154,16 +158,16 @@ describe QueueItemsController do
         expect(queue_item2.reload.position).to eq(2)
       end
     end
-
-    it_behaves_like "require_sign_in" do
-      let(:action) { post :update_queue, queue_items: [{id: 1, position: 2}, {id: 2, position: 1}] }
-    end
   end
 
   describe "#drag_sort" do
 
     let!(:queue_item1) { Fabricate(:queue_item, position: 1, user: current_user) }
     let!(:queue_item2) { Fabricate(:queue_item, position: 2, user: current_user) }
+
+    it_behaves_like "require sign in" do
+      let(:action) { post :drag_sort }
+    end
 
     it "renders nothing" do
       post :drag_sort, queue_item: [queue_item2.id, queue_item1.id]
@@ -181,6 +185,10 @@ describe QueueItemsController do
 
     let!(:queue_item1) { Fabricate(:queue_item, position: 1, user: current_user) }
     let!(:review) { Fabricate(:review, video: queue_item1.video, rating: 1, user: current_user) }
+
+    it_behaves_like "require sign in" do
+      let(:action) { post :update_rating }
+    end
 
     it "renders nothing" do
       post :update_rating, queue_item_id: queue_item1.video.id, rating: 3
