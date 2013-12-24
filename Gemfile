@@ -9,6 +9,9 @@ gem 'fabrication'
 gem 'faker'
 gem 'pry'
 gem 'strong_parameters'
+gem 'jquery-rails', "~> 2.3.0"
+gem 'sidekiq'
+gem 'unicorn'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -37,5 +40,3 @@ end
 group :production do
   gem 'pg'
 end
-
-gem 'jquery-rails', "~> 2.3.0"

@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     invitation = Invitation.find_by_token(params[:invitation_token])
 
     if @user.save
-      AppMailer.send_welcome_email(@user).deliver
+      AppMailer.delay.send_welcome_email(@user)
       session[:user_id] = @user.id
       if invitation
         @user.leaders << invitation.inviter
