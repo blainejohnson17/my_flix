@@ -8,7 +8,7 @@ describe SessionsController do
       let(:action) { get :new }
     end
 
-    it "redirects to home page for athenticated users" do
+    it "redirects to home page for authenticated users" do
       session[:user_id] = Fabricate(:user).id
       get :new
       expect(response).to redirect_to home_path
