@@ -6,7 +6,7 @@ describe VideosController do
 
   describe "GET #index" do
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { get :index }
     end
 
@@ -20,7 +20,7 @@ describe VideosController do
 
     let(:video) { Fabricate(:video) }
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { get :show, id: 3 }
     end
 
@@ -39,7 +39,7 @@ describe VideosController do
 
   describe "GET #search" do
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { get :search, term: 'go' }
     end
 

@@ -9,7 +9,7 @@ describe QueueItemsController do
     let!(:queue_item1) { Fabricate(:queue_item, position: 1, user: current_user) }
     let!(:queue_item2) { Fabricate(:queue_item, position: 2, user: current_user) }
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { get :index }
     end
 
@@ -28,7 +28,7 @@ describe QueueItemsController do
 
     let(:gooneys) { video = Fabricate(:video) }
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { post :create }
     end
 
@@ -69,7 +69,7 @@ describe QueueItemsController do
 
   describe "DELETE #destroy" do
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { delete :destroy, id: 1 }
     end
 
@@ -105,7 +105,7 @@ describe QueueItemsController do
     let!(:queue_item1) { Fabricate(:queue_item, position: 1, user: current_user) }
     let!(:queue_item2) { Fabricate(:queue_item, position: 2, user: current_user) }
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { post :update_queue }
     end
 
@@ -165,7 +165,7 @@ describe QueueItemsController do
     let!(:queue_item1) { Fabricate(:queue_item, position: 1, user: current_user) }
     let!(:queue_item2) { Fabricate(:queue_item, position: 2, user: current_user) }
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { post :drag_sort }
     end
 
@@ -186,7 +186,7 @@ describe QueueItemsController do
     let!(:queue_item1) { Fabricate(:queue_item, position: 1, user: current_user) }
     let!(:review) { Fabricate(:review, video: queue_item1.video, rating: 1, user: current_user) }
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { post :update_rating }
     end
 

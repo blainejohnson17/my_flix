@@ -4,7 +4,7 @@ describe RelationshipsController do
 
   describe "GET #index" do
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { get :index }
     end
 
@@ -20,7 +20,7 @@ describe RelationshipsController do
 
     before { set_current_user }
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { delete :destroy, id: 3 }
     end
 
@@ -51,7 +51,7 @@ describe RelationshipsController do
 
     before { set_current_user }
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { post :create, leader_id: 3 }
     end
 
