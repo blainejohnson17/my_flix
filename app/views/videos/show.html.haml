@@ -10,6 +10,7 @@
           %div(class="rateit" data-rateit-value="#{@video.average_rating}" data-rateit-readonly="true" data-rateit-ispreset="true")
         %p= @video.description
         .actions
+        = link_to "Watch Now", @video.video_url, class: "btn btn-primary"
         - if !current_user.queued_video?(@video)
           = link_to "+ My Queue", queue_items_path(video_id: @video.id), method: :post, class: 'btn'
         
