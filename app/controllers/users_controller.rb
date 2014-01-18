@@ -12,16 +12,26 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    invitation = Invitation.find_by_token(params[:invitation_token])
 
-    if @user.save
+    if @user.valid?
+      Stripe.api_key = ENV['STRIPE_SECRET_KEY']
+      begin
+        charge = Stripe::Charge.create(
+          :amount => 999,
+          :currency => "usd",
+          :card => params[:stripeToken],
+          :description => "Myflix membership payment for #{@user.email}."
+        )
+      rescue Stripe::CardError => e
+        flash[:error] = e.message
+        render :new
+        return
+      end
+
+      @user.save
       AppMailer.delay.send_welcome_email(@user)
       session[:user_id] = @user.id
-      if invitation
-        @user.leaders << invitation.inviter
-        @user.followers << invitation.inviter
-        invitation.update_column(:token, nil)
-      end
+      handle_invitation
       redirect_to home_path, notice: 'You have successfully registered!'
     else
       render :new
@@ -43,5 +53,14 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :full_name, :password)
+  end
+
+  def handle_invitation
+    invitation = Invitation.find_by_token(params[:invitation_token])
+    if invitation
+      @user.leaders << invitation.inviter
+      @user.followers << invitation.inviter
+      invitation.update_column(:token, nil)
+    end    
   end
 end
