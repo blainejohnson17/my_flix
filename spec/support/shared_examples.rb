@@ -1,4 +1,4 @@
-shared_examples "require sign in" do
+shared_examples "requires sign in" do
   it "redirects to sign in page" do
     clear_current_user
     action
@@ -6,8 +6,16 @@ shared_examples "require sign in" do
   end
 end
 
-shared_examples "require sign out" do
+shared_examples "requires sign out" do
   it "redirects to home page" do
+    set_current_user
+    action
+    expect(response).to redirect_to home_path
+  end
+end
+
+shared_examples "requires admin" do
+  it "redirects to home page for non admin users" do
     set_current_user
     action
     expect(response).to redirect_to home_path

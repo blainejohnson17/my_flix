@@ -4,7 +4,7 @@ describe CategoriesController do
 
   describe "GET #show" do
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { get :show, id: 3 }
     end
 

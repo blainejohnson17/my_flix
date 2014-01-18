@@ -4,11 +4,11 @@ describe SessionsController do
   
   describe "GET #new" do
 
-    it_behaves_like "require sign out" do
+    it_behaves_like "requires sign out" do
       let(:action) { get :new }
     end
 
-    it "redirects to home page for athenticated users" do
+    it "redirects to home page for authenticated users" do
       session[:user_id] = Fabricate(:user).id
       get :new
       expect(response).to redirect_to home_path
@@ -24,7 +24,7 @@ describe SessionsController do
 
     let(:bob) { Fabricate(:user) }
 
-    it_behaves_like "require sign out" do
+    it_behaves_like "requires sign out" do
       let(:action) { post :create }
     end    
 

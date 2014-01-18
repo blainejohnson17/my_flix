@@ -15,6 +15,11 @@ Myflix::Application.routes.draw do
     end
     resources :reviews, only: [:create]
   end
+
+  namespace :admin do
+    resources :videos, only: [:new, :create]
+  end
+
   resources :categories, only: [:show], path: 'genres'
   resources :users, only: [:show, :create]
   resources :sessions, only: [:create]
@@ -31,6 +36,7 @@ Myflix::Application.routes.draw do
   get 'expired_token', to: 'password_resets#expired_token'
 
   resources :invitations, only: [:new, :create]
+
   
   get 'ui(/:action)', controller: 'ui'
 end

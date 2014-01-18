@@ -4,7 +4,7 @@ describe InvitationsController do
 
   describe "GET #new" do
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { get :new }
     end
 
@@ -18,7 +18,7 @@ describe InvitationsController do
 
   describe "POST #create" do
 
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { post :create }
     end
 

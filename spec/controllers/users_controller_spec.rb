@@ -4,7 +4,7 @@ describe UsersController do
 
   describe "GET #show" do
     
-    it_behaves_like "require sign in" do
+    it_behaves_like "requires sign in" do
       let(:action) { get :show, id: 2 }
     end
     
@@ -17,7 +17,7 @@ describe UsersController do
 
   describe "GET #new" do
 
-    it_behaves_like "require sign out" do
+    it_behaves_like "requires sign out" do
       let(:action) { get :new }
     end
 
@@ -29,7 +29,7 @@ describe UsersController do
 
   describe "POST #create" do
 
-    it_behaves_like "require sign out" do
+    it_behaves_like "requires sign out" do
       let(:action) { post :create }
     end
 
@@ -133,7 +133,7 @@ describe UsersController do
 
   describe "GET #new_with_invitation_token" do
 
-    it_behaves_like "require sign out" do
+    it_behaves_like "requires sign out" do
       let(:action) { get :new_with_invitation_token, invitation_token: 3 }
     end
 
