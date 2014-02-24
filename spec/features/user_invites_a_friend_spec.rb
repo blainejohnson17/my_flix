@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature "User invites a friend" do
   
-  scenario "User successfully invites a friend and friend accepts invitation" do
+  scenario "User successfully invites a friend and friend accepts invitation", { js: true, vcr: true } do
     bob = Fabricate(:user)
     sign_in(bob)
 
@@ -29,9 +29,10 @@ feature "User invites a friend" do
     expect(page).to have_field('Email Address', with: 'alice@example.com')
     fill_in "Password", with: 'password'
     fill_in "Full name", with: 'Alice Jones'
-    save_and_open_page
     fill_in "Credit Card Number", with: '4242424242424242'
     fill_in "Security Code", with: '123'
+    select "4 - April", from: "date_month"
+    select "2018", from: "date_year"
     click_button "Sign Up"
     expect(page).to have_content('Welcome, Alice Jones')
   end
