@@ -24,12 +24,13 @@ class UsersController < ApplicationController
         handle_invitation
         AppMailer.delay.send_welcome_email(@user)
         session[:user_id] = @user.id
-        redirect_to home_path, notice: 'You have successfully registered!'
+        redirect_to home_path, notice: 'Welcome to MyFLiX!'
       else
         flash[:error] = charge.error_message
         render :new
       end
     else
+      flash[:error] = "Invalid user information. Please check the errors below."
       render :new
     end
   end
