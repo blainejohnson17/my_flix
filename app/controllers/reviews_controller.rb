@@ -3,9 +3,10 @@ class ReviewsController < ApplicationController
   
   def create
     @video = Video.find(params[:video_id])
-    review = @video.reviews.new(review_params.merge(user: current_user))
+    @review = @video.reviews.first_or_initialize(user: current_user)
+    @review.content = review_params[:content]
 
-    if review.save
+    if @review.save
       flash[:notice] = "Your review was created!"
       redirect_to @video
     else
@@ -13,6 +14,14 @@ class ReviewsController < ApplicationController
       flash[:error] = "You need to add review text to create a review!"
       render 'videos/show'
     end
+  end
+
+  def update_rating
+    video = Video.find(params[:video_id])
+    review = video.reviews.first_or_initialize(user: current_user)
+    review.rating = params[:rating]
+    review.save(validate: false)
+    render nothing: true
   end
 
   private

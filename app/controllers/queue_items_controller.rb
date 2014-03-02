@@ -28,7 +28,7 @@ class QueueItemsController < ApplicationController
     end
     @queue_items_sorted.each_with_index do |queue_item_data, index|
       queue_item = QueueItem.find(queue_item_data[:id])
-      queue_item.update_attributes(position: index + 1, rating: queue_item_data[:rating])
+      queue_item.update_attributes(position: index + 1)
     end
     redirect_to my_queue_path
   end
@@ -37,12 +37,6 @@ class QueueItemsController < ApplicationController
     params[:queue_item].each_with_index do |id, index|
       QueueItem.update_all({position: index+1}, {id: id})
     end
-    render nothing: true
-  end
-
-  def update_rating
-    queue_item = QueueItem.find(params[:queue_item_id])
-    queue_item.update_attributes(rating: params[:rating])
     render nothing: true
   end
 

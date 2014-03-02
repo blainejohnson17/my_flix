@@ -6,8 +6,8 @@ class VideosController < ApplicationController
 
   def show
     @video = Video.find(params[:id])
-    @reviews = @video.reviews
-    @review = Review.where(user_id: current_user.id, video_id: @video.id).first
+    @reviews = @video.reviews.where('content IS NOT NULL')
+    @review = @video.reviews.first_or_initialize(user: current_user)
   end
 
   def search
