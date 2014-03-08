@@ -3,8 +3,7 @@ class ReviewsController < ApplicationController
   
   def create
     @video = Video.find(params[:video_id])
-    @review = @video.reviews.first_or_initialize(user: current_user)
-    @review.content = review_params[:content]
+    @review = @video.reviews.new(review_params.merge(user: current_user))
 
     if @review.save
       flash[:notice] = "Your review was created!"
@@ -16,17 +15,9 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def update_rating
-    video = Video.find(params[:video_id])
-    review = video.reviews.first_or_initialize(user: current_user)
-    review.rating = params[:rating]
-    review.save(validate: false)
-    render nothing: true
-  end
-
   private
 
   def review_params
-    params.require(:review).permit(:content, :rating)
+    params.require(:review).permit(:content)
   end
 end

@@ -15,7 +15,8 @@ Myflix::Application.routes.draw do
     end
     resources :reviews, only: [:create]
   end
-  post 'update_rating', to: 'reviews#update_rating'
+  
+  post 'update_rating', to: 'ratings#update_rating'
 
   namespace :admin do
     resources :videos, only: [:new, :create]

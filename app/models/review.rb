@@ -4,5 +4,9 @@ class Review < ActiveRecord::Base
 
   validates_presence_of :content
   validates_uniqueness_of :video_id, scope: :user_id
-  validates_numericality_of :rating, only_integer: :true
+
+  def rating
+    rating = Rating.where(video_id: video.id, user_id: user.id).first
+    rating.value if rating
+  end
 end

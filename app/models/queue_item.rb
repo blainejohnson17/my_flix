@@ -6,11 +6,11 @@ class QueueItem < ActiveRecord::Base
   belongs_to :video
 
   delegate :category, to: :video
-  delegate :name, to: :category, prefix: true
-  delegate :title, to: :video, prefix: :video
+  delegate :category_name, to: :video
+  delegate :title, to: :video, prefix: true
 
   def rating
-    review = Review.where(video_id: video.id, user_id: user.id).first
-    review.rating if review
+    rating = Rating.where(video_id: video.id, user_id: user.id).first
+    rating.value if rating
   end
 end

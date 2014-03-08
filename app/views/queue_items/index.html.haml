@@ -25,7 +25,7 @@
                   %td
                     = button_to "Play", nil, class: "btn"
                   %td
-                    = render partial: "reviews/rating_select", locals: {id: "queue_item_#{queue_item.id}_rateit", video_id: "#{queue_item.video_id}", current_rating: queue_item.rating}
+                    = render partial: "ratings/rating_select", locals: {id: "queue_item_#{queue_item.id}_rateit", video_id: "#{queue_item.video_id}", current_rating: queue_item.rating}
                   %td
                     = link_to queue_item.category_name, queue_item.category
                   %td

@@ -19,8 +19,6 @@ describe ForgotPasswordsController do
 
     context "with existing email" do
 
-      after { ActionMailer::Base.deliveries.clear }
-
       it "redirects to the forgot password confirmation page" do
         bob = Fabricate(:user)
         post :create, email: bob.email

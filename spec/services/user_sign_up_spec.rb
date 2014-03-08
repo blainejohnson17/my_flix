@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe UserSignUp do
   describe "#sign_up" do
+
     context "valid personal info and valid card" do
       
       let(:charge) { double(:charge, successful?: true) }
@@ -9,8 +10,6 @@ describe UserSignUp do
       let(:invitation) { Fabricate(:invitation, inviter: bob) }
 
       before { StripeWrapper::Charge.should_receive(:create) { charge } }
-
-      after { ActionMailer::Base.deliveries.clear }
 
       it "is successful" do
         result = UserSignUp.new(Fabricate.build(:user)).sign_up("some_stripe_token", nil)
@@ -52,7 +51,10 @@ describe UserSignUp do
 
       let(:charge) { double(:charge, successful?: false, error_message: "Your card was declined.") }
 
-      before { StripeWrapper::Charge.should_receive(:create) { charge } }
+      before do 
+        StripeWrapper::Charge.should_receive(:create) { charge }
+        ActionMailer::Base.deliveries.clear
+      end
 
       it "is not successful" do
         result = UserSignUp.new(Fabricate.build(:user)).sign_up("some_stripe_token", nil)
@@ -68,9 +70,16 @@ describe UserSignUp do
         UserSignUp.new(Fabricate.build(:user)).sign_up("some_stripe_token", nil)
         expect(User.count).to eq(0)
       end
+
+      it "doesn't send an email" do
+        UserSignUp.new(Fabricate.build(:user)).sign_up("some_stripe_token", nil)
+        expect(ActionMailer::Base.deliveries).to be_empty
+      end
     end
 
     context "with invalid personal info" do
+
+      before { ActionMailer::Base.deliveries.clear }
 
       it "is not successful" do
         result = UserSignUp.new(Fabricate.build(:user, email: nil)).sign_up("some_stripe_token", nil)

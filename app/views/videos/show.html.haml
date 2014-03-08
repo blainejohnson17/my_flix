@@ -7,7 +7,7 @@
         %header
           %h3= @video.title
           %small Your Rating:
-          = render partial: "reviews/rating_select", locals: {id: "header_rateit", video_id: "#{@video.id}", current_rating: @review.rating}
+          = render partial: "ratings/rating_select", locals: {id: "header_rateit", video_id: "#{@video.id}", current_rating: @review.rating}
         - if !@video.average_rating.zero?
           %small Average Rating:
           %div(class="rateit" data-rateit-value="#{@video.average_rating}" data-rateit-readonly="true" data-rateit-ispreset="true")
@@ -20,11 +20,11 @@
 %section.reviews.container
   .row
     .span10.offset1
-      - if !@review.content
+      - if @review.new_record?
         = form_for [@video, Review.new] do |f|
           %fieldset
             %label Rate this video
-            = render partial: "reviews/rating_select", locals: {id: "review_rateit", video_id: "#{@video.id}", current_rating: @review.rating}
+            = render partial: "ratings/rating_select", locals: {id: "review_rateit", video_id: "#{@video.id}", current_rating: @review.rating}
             %label Write Review
             = f.text_area :content, rows: 6, class: "span6"
           %fieldset.actions.clearfix
