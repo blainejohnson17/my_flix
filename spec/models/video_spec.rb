@@ -58,7 +58,7 @@ describe Video do
     it "returns the average of all ratings when there are more than one reviews" do
       Fabricate(:rating, video: video, value: 2, user: bob)
       Fabricate(:rating, video: video, value: 3, user: alice)
-      expect(video.average_rating).to eq((2 + 3)/2.0)
+      expect(video.average_rating).to eq(2.5)
     end
 
     it "returns the average with up to 2 decimal places of precision" do

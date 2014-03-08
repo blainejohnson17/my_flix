@@ -22,9 +22,8 @@ class Video < ActiveRecord::Base
       return 0
     else
       average = 0  
-      video_ratings = ratings.where('value > ?', 0)
-      video_ratings.each { |rating| average += rating.value }
-      (average /= video_ratings.count.to_f).round(2)
+      ratings.each { |rating| average += rating.value }
+      (average /= ratings.count.to_f).round(2)
     end
   end
 end
