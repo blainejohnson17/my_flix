@@ -186,6 +186,9 @@ GEM
       mime-types (~> 1.25)
       multi_json (>= 1.0.4, < 2)
       rest-client (~> 1.4)
+    stripe_event (1.1.0)
+      activesupport (>= 3.1)
+      stripe (~> 1.6)
     strong_parameters (0.2.1)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
@@ -244,6 +247,7 @@ DEPENDENCIES
   sidekiq
   sqlite3
   stripe
+  stripe_event
   strong_parameters
   uglifier (>= 1.0.3)
   unicorn

@@ -66,6 +66,10 @@ describe StripeWrapper do
         it "creates a customer with valid card", :vcr do
           expect(response).to be_successful
         end
+
+        it "returns the customer token", :vcr do
+          expect(response.customer_token).to be_present
+        end
       end
 
       context "with declined card" do
