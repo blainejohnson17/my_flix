@@ -1,13 +1,14 @@
 class VideosController < ApplicationController
   before_filter :require_user
+
   def index
     @categories = Category.all
   end
 
   def show
     @video = Video.find(params[:id])
-    @reviews = @video.reviews
-    @review = Review.where(user_id: current_user.id, video_id: @video.id).first
+    @reviews = @video.reviews.where('content IS NOT NULL')
+    @review = @video.reviews.where(user_id: current_user.id).first_or_initialize
   end
 
   def search

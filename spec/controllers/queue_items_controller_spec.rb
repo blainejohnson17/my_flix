@@ -180,24 +180,4 @@ describe QueueItemsController do
       expect(queue_item2.reload.position).to eq(1)
     end
   end
-
-  describe "#update_rating" do
-
-    let!(:queue_item1) { Fabricate(:queue_item, position: 1, user: current_user) }
-    let!(:review) { Fabricate(:review, video: queue_item1.video, rating: 1, user: current_user) }
-
-    it_behaves_like "requires sign in" do
-      let(:action) { post :update_rating }
-    end
-
-    it "renders nothing" do
-      post :update_rating, queue_item_id: queue_item1.video.id, rating: 3
-      expect(response).to have_text(" ")
-    end
-
-    it "updates rating of given video on users review" do
-      post :update_rating, queue_item_id: queue_item1.video.id, rating: 3
-      expect(review.reload.rating).to eq(3)
-    end
-  end
 end

@@ -15,6 +15,8 @@ Myflix::Application.routes.draw do
     end
     resources :reviews, only: [:create]
   end
+  
+  post 'update_rating', to: 'ratings#update_rating'
 
   namespace :admin do
     resources :videos, only: [:new, :create]
@@ -26,7 +28,6 @@ Myflix::Application.routes.draw do
   resources :queue_items, only: [:create, :destroy]
   post 'update_queue', to: 'queue_items#update_queue'
   post 'drag_sort', to: 'queue_items#drag_sort'
-  post 'update_rating', to: 'queue_items#update_rating'
 
   resources :forgot_passwords, only: [:create]
   get 'forgot_password', to: 'forgot_passwords#new'

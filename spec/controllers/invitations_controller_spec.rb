@@ -18,8 +18,6 @@ describe InvitationsController do
 
   describe "POST #create" do
 
-    after { ActionMailer::Base.deliveries.clear }
-
     it_behaves_like "requires sign in" do
       let(:action) { post :create }
     end
@@ -52,6 +50,8 @@ describe InvitationsController do
     end
 
     context "with invalid input" do
+
+      before { ActionMailer::Base.deliveries.clear }
 
       it "render the new template" do
         set_current_user
