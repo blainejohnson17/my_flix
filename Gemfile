@@ -14,7 +14,7 @@ gem 'sidekiq'
 gem 'unicorn'
 gem 'carrierwave'
 gem 'mini_magick'
-gem "fog", "~> 1.3.1"
+gem "fog"
 gem 'stripe'
 gem 'stripe_event'
 gem 'figaro'
