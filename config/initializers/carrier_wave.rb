@@ -7,6 +7,7 @@ CarrierWave.configure do |config|
       :aws_secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY'],
     }
   else
+    config.fog_directory  = 'myflix.bjj'
     config.storage = :file
     config.enable_processing = Rails.env.development?
   end
