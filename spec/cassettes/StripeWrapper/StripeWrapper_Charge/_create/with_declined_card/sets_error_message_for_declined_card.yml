@@ -19,8 +19,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.9.9","lang":"ruby","lang_version":"2.0.0 p247 (2013-06-27)","platform":"x86_64-darwin12.5.0","publisher":"stripe","uname":"Darwin
-        My-Macs-MacBook-Pro.local 13.0.0 Darwin Kernel Version 13.0.0: Thu Sep 19
-        22:22:27 PDT 2013; root:xnu-2422.1.72~6/RELEASE_X86_64 x86_64"}'
+        My-Macs-MacBook-Pro.local 13.1.0 Darwin Kernel Version 13.1.0: Thu Jan 16
+        19:40:37 PST 2014; root:xnu-2422.90.20~2/RELEASE_X86_64 x86_64"}'
       Content-Length:
       - '81'
   response:
@@ -31,19 +31,19 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 24 Feb 2014 03:47:09 GMT
+      - Mon, 10 Mar 2014 00:11:54 GMT
       Content-Type:
       - application/json;charset=utf-8
       Content-Length:
       - '570'
       Connection:
       - keep-alive
-      Access-Control-Max-Age:
-      - '300'
       Access-Control-Allow-Credentials:
       - 'true'
       Access-Control-Allow-Methods:
       - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '300'
       Cache-Control:
       - no-cache, no-store
       Strict-Transport-Security:
@@ -52,14 +52,14 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "tok_103YMQ2tP72EN7gHYS82whYU",
+          "id": "tok_103dY72tP72EN7gHVOgGjLtQ",
           "livemode": false,
-          "created": 1393213629,
+          "created": 1394410314,
           "used": false,
           "object": "token",
           "type": "card",
           "card": {
-            "id": "card_103YMQ2tP72EN7gHpHtWF3KF",
+            "id": "card_103dY72tP72EN7gHZKKzZKbt",
             "object": "card",
             "last4": "0002",
             "type": "Visa",
@@ -78,13 +78,13 @@ http_interactions:
           }
         }
     http_version: 
-  recorded_at: Mon, 24 Feb 2014 03:47:09 GMT
+  recorded_at: Mon, 10 Mar 2014 00:11:54 GMT
 - request:
     method: post
     uri: https://api.stripe.com/v1/charges
     body:
       encoding: US-ASCII
-      string: amount=999&currency=usd&card=tok_103YMQ2tP72EN7gHYS82whYU&description=a%20valid%20charge
+      string: amount=999&currency=usd&card=tok_103dY72tP72EN7gHVOgGjLtQ&description=a%20valid%20charge
     headers:
       Accept:
       - '*/*; q=0.5, application/xml'
@@ -98,8 +98,8 @@ http_interactions:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
       - '{"bindings_version":"1.9.9","lang":"ruby","lang_version":"2.0.0 p247 (2013-06-27)","platform":"x86_64-darwin12.5.0","publisher":"stripe","uname":"Darwin
-        My-Macs-MacBook-Pro.local 13.0.0 Darwin Kernel Version 13.0.0: Thu Sep 19
-        22:22:27 PDT 2013; root:xnu-2422.1.72~6/RELEASE_X86_64 x86_64"}'
+        My-Macs-MacBook-Pro.local 13.1.0 Darwin Kernel Version 13.1.0: Thu Jan 16
+        19:40:37 PST 2014; root:xnu-2422.90.20~2/RELEASE_X86_64 x86_64"}'
       Content-Length:
       - '88'
   response:
@@ -110,21 +110,21 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Mon, 24 Feb 2014 03:47:09 GMT
+      - Mon, 10 Mar 2014 00:11:55 GMT
       Content-Type:
       - application/json;charset=utf-8
       Content-Length:
       - '162'
       Connection:
       - keep-alive
-      Access-Control-Max-Age:
-      - '300'
       Access-Control-Allow-Credentials:
       - 'true'
-      Cache-Control:
-      - no-cache, no-store
       Access-Control-Allow-Methods:
       - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
     body:
       encoding: UTF-8
       string: |
@@ -133,9 +133,9 @@ http_interactions:
             "message": "Your card was declined.",
             "type": "card_error",
             "code": "card_declined",
-            "charge": "ch_103YMQ2tP72EN7gHbx0mIFlR"
+            "charge": "ch_103dY72tP72EN7gHUMs3Hqhu"
           }
         }
     http_version: 
-  recorded_at: Mon, 24 Feb 2014 03:47:10 GMT
+  recorded_at: Mon, 10 Mar 2014 00:11:55 GMT
 recorded_with: VCR 2.8.0

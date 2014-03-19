@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :queue_items, order: 'position', dependent: :destroy
   has_many :reviews, order: 'created_at DESC', dependent: :destroy
+  has_many :ratings, dependent: :destroy
   has_many :leading_relationships, class_name: "Relationship", :foreign_key => "leader_id", dependent: :destroy
   has_many :followers, through: :leading_relationships
   has_many :following_relationships, class_name: "Relationship", :foreign_key => "follower_id", dependent: :destroy
@@ -26,5 +27,9 @@ class User < ActiveRecord::Base
 
   def can_follow?(another_user)
     !(self.leaders.include?(another_user) || self == another_user)
+  end
+
+  def deactivate!
+    update_column(:active, false)
   end
 end

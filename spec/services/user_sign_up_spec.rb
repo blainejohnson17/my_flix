@@ -5,11 +5,11 @@ describe UserSignUp do
 
     context "valid personal info and valid card" do
       
-      let(:charge) { double(:charge, successful?: true) }
+      let(:customer) { double(:customer, successful?: true, customer_token: "abcdefg") }
       let(:bob) { Fabricate(:user) }
       let(:invitation) { Fabricate(:invitation, inviter: bob) }
 
-      before { StripeWrapper::Charge.should_receive(:create) { charge } }
+      before { StripeWrapper::Customer.should_receive(:create) { customer } }
 
       it "is successful" do
         result = UserSignUp.new(Fabricate.build(:user)).sign_up("some_stripe_token", nil)
@@ -19,6 +19,11 @@ describe UserSignUp do
       it "saves new user to the database" do
         UserSignUp.new(Fabricate.build(:user)).sign_up("some_stripe_token", nil)
         expect(User.count).to eq(1)
+      end
+
+      it "stores the customer token from stripe" do
+        UserSignUp.new(Fabricate.build(:user)).sign_up("some_stripe_token", nil)
+        expect(User.first.customer_token).to eq("abcdefg")
       end
 
       it "sends email to the user" do
@@ -49,10 +54,10 @@ describe UserSignUp do
 
     context "with valid personal info and declined card" do
 
-      let(:charge) { double(:charge, successful?: false, error_message: "Your card was declined.") }
+      let(:customer) { double(:customer, successful?: false, error_message: "Your card was declined.") }
 
       before do 
-        StripeWrapper::Charge.should_receive(:create) { charge }
+        StripeWrapper::Customer.should_receive(:create) { customer }
         ActionMailer::Base.deliveries.clear
       end
 
@@ -101,8 +106,8 @@ describe UserSignUp do
         expect(ActionMailer::Base.deliveries).to be_empty
       end
 
-      it "doesn't charge the card" do
-        StripeWrapper::Charge.should_not_receive(:create)
+      it "doesn't create a customer" do
+        StripeWrapper::Customer.should_not_receive(:create)
         UserSignUp.new(Fabricate.build(:user, email: nil)).sign_up("some_stripe_token", nil)
       end
     end

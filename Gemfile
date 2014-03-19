@@ -14,7 +14,9 @@ gem 'sidekiq'
 gem 'unicorn'
 gem 'carrierwave'
 gem 'mini_magick'
+gem "fog"
 gem 'stripe'
+gem 'stripe_event'
 gem 'figaro'
 
 group :assets do
