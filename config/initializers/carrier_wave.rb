@@ -1,5 +1,5 @@
 CarrierWave.configure do |config|
-  if Rails.env.staging? || Rails.env.production? || Rails.env.development?
+  if Rails.env.staging? || Rails.env.production?
     config.storage = :fog
     config.fog_credentials = {
       :provider               => 'AWS',
@@ -7,8 +7,8 @@ CarrierWave.configure do |config|
       :aws_secret_access_key  => ENV['AWS_SECRET_ACCESS_KEY'],
       :region                 => 'us-east-1'
     }
-  else
     config.fog_directory  = ENV['AWS_BUCKET']
+  else
     config.storage = :file
     config.enable_processing = Rails.env.development?
   end
