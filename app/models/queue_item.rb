@@ -8,6 +8,7 @@ class QueueItem < ActiveRecord::Base
   delegate :category, to: :video
   delegate :category_name, to: :video
   delegate :title, to: :video, prefix: true
+  delegate :video_url, to: :video
 
   def rating
     rating = Rating.where(video_id: video.id, user_id: user.id).first
