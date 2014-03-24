@@ -13,4 +13,13 @@ class ApplicationController < ActionController::Base
   def require_sign_out
     redirect_to home_path if current_user
   end
+
+  def owner?(user)
+    current_user == user
+  end
+
+  def access_denied
+    flash[:error] = "You don't have proper permissions to do that."
+    redirect_to home_path
+  end
 end
