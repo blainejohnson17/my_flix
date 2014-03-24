@@ -1,0 +1,14 @@
+%section.account.container
+  .row
+    .span10.offset1
+      = bootstrap_form_for @user do |f|
+        %header
+          %h1 Your Account
+        %fieldset
+          = f.email_field :email, class: "span3"
+          = f.password_field :password, class: "span3"
+          = f.text_field :full_name, class: "span3"
+        %fieldset.actions.control-group
+          .controls
+            %input(type="submit" value="Update" class="btn")
+            = link_to "Cancel", root_path

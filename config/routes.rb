@@ -24,7 +24,7 @@ Myflix::Application.routes.draw do
   end
 
   resources :categories, only: [:show], path: 'genres'
-  resources :users, only: [:show, :create]
+  resources :users, only: [:show, :create, :edit, :update]
   resources :sessions, only: [:create]
   resources :queue_items, only: [:create, :destroy]
   post 'update_queue', to: 'queue_items#update_queue'

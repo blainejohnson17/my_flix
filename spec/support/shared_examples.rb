@@ -27,3 +27,24 @@ shared_examples "tokenable" do
     expect(object.token).to be_present
   end
 end
+
+shared_examples "sets user" do
+    it "assigns the requested user to @user" do
+      action
+      expect(assigns(:user)).to eq(user)
+  end
+end
+
+shared_examples "requires owner" do
+  it "redirects to home_path if current user is not the owner" do
+    Fabricate(:user)
+    action
+    expect(response).to redirect_to home_path
+  end
+
+  it "sets error message" do
+    Fabricate(:user)
+    action
+    expect(flash[:error]).to be_present
+  end
+end

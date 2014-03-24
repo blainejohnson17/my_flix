@@ -1,13 +1,25 @@
 class UsersController < ApplicationController
+  before_filter :set_user, only: [:show, :edit, :update]
   before_filter :require_user, only: [:show]
+  before_filter :require_owner, only: [:edit, :update]
   before_filter :require_sign_out, only: [:new, :create, :new_with_invitation_token]
 
   def show
-    @user = User.find(params[:id])
   end
 
   def new
     @user = User.new
+  end
+
+  def new_with_invitation_token
+    invitation = Invitation.find_by_token(params[:invitation_token])
+    
+    if invitation
+      @user = User.new(email: invitation.recipient_email)
+      render :new
+    else
+      redirect_to register_path
+    end
   end
 
   def create
@@ -23,18 +35,27 @@ class UsersController < ApplicationController
     end
   end
 
-  def new_with_invitation_token
-    invitation = Invitation.find_by_token(params[:invitation_token])
-    
-    if invitation
-      @user = User.new(email: invitation.recipient_email)
-      render :new
+  def edit
+  end
+
+  def update
+    if @user.update_attributes(user_params)
+      redirect_to @user, notice: "Your account info was successfully updated!"
     else
-      redirect_to register_path
+      flash[:error] = "Please fix the errors below."
+      render :edit
     end
   end
 
   private
+
+  def set_user
+    @user = User.where(id: params[:id]).first
+  end
+
+  def require_owner
+    access_denied unless owner?(@user)
+  end
 
   def user_params
     params.require(:user).permit(:email, :full_name, :password)
