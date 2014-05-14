@@ -9,11 +9,11 @@
 # blaine = User.create(email: "blaine@gmail.com", full_name: "Blaine Johnson", password: "password")
 # Review.create(rating: 5, content: "Great Movie!!", video: monk, user: jon)
 # Review.create(rating: 1, content: "This movie sucks!!", video: monk, user: blaine)
-comedy = Category.find_or_create_name(name: "TV Comedy")
+comedy = Category.find_or_create_by_name("TV Comedy")
 Video.create(
   title: 'The Croods',
   description: 'When an earthquake obliterates their cave, an unworldly prehistoric family is forced to journey through unfamiliar terrain in search of a new home.',
   remote_small_cover_url: "http://cdn3.nflximg.net/webp/2353/3862353.webp",
-  remote_large_cover_url:"http://cdn6.nflximg.net/webp/2356/3862356.webp",
+  remote_large_cover_url: "http://cdn7.nflximg.net/webp/1367/3731367.webp",
   category: comedy
 )
