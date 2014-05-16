@@ -1,0 +1,5 @@
+$('.videos').append('#{escape_javascript(render partial: "videos", :locals => { :videos => @videos })}');
+$('a.load-more-videos').attr('href', '#{category_path page: @videos.next_page}');
+ 
+- unless @videos.next_page
+  $('a.load-more-videos').remove();
