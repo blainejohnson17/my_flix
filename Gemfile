@@ -18,6 +18,7 @@ gem "fog"
 gem 'stripe'
 gem 'stripe_event'
 gem 'figaro'
+gem 'will_paginate', '~> 3.0.5'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
