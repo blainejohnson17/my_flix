@@ -11,6 +11,8 @@ class Video < ActiveRecord::Base
 
   delegate :name, to: :category, prefix: true
 
+  self.per_page = 48
+
   def self.search_by_title(search_term)
     search_term.strip!
     search_term.blank? ? [] : \
