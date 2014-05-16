@@ -15,4 +15,5 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jquery.rateit
+//= require jquery.inview.min.js
 //= require_tree .
