@@ -1,0 +1,6 @@
+- videos.in_groups_of(6) do |video_group|
+  .row-fluid
+  - video_group.each do |video|
+    .video.span2
+      = link_to video do 
+        %img(src="#{video.small_cover_url}")

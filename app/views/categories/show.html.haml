@@ -7,8 +7,6 @@
         %option(value="a-z") Title: A - Z
         %option(value="z-a") Title: Z - A
         %option(value="rating") Rating
-  %article.row
-    - @category.videos.each do |video|
-      .video.span2
-        = link_to video do 
-          %img(src="#{video.small_cover_url}")
+  %article.videos.row
+    = render partial: "videos", locals: { videos: @videos }
+  = link_to '', category_path(page: @videos.next_page), class: 'load-more-videos', remote: true if @videos.next_page
