@@ -5,7 +5,7 @@
         %img(src="#{@video.large_cover_url}")
       .video_info.span3
         %header
-          %h3= @video.title
+          %h1= @video.title
           %small Your Rating:
           = render partial: "ratings/rating_select", locals: {id: "header_rateit", video_id: "#{@video.id}", current_rating: @review.rating}
         - if !@video.average_rating.zero?
