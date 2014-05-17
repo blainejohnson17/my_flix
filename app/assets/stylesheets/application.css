@@ -13,5 +13,6 @@
  *= require bootstrap-responsive
  *= require whitespace-reset
  *= require rateit
+ *= require slick
  *= require_tree .
 */
