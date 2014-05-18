@@ -3,9 +3,9 @@
     %h1= @category.name
     .genre_sorting
       Sort by:
-      %select(name="")
-        %option(value="a-z") Title: A - Z
-        %option(value="z-a") Title: Z - A
+      %select(id="video_sort")
+        %option(value="title ASC") Title: A - Z
+        %option(value="title DESC") Title: Z - A
         %option(value="rating") Rating
   %article.videos.row
     = render partial: "videos", locals: { videos: @videos }
