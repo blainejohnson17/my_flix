@@ -9,21 +9,21 @@ describe Category do
 
     let(:comedy) { Fabricate(:category) }
 
-    it "returns an array of six videos if there are six videos" do
-      6.times do
+    it "returns an array of 48 videos if there are 48 videos" do
+      48.times do
         Fabricate(:video, category: comedy)
       end
-      expect(comedy.recent_videos.count).to eq(6)
+      expect(comedy.recent_videos.count).to eq(48)
     end
     
-    it "returns an array of six videos more than six videos" do
-      7.times do
+    it "returns an array of 48 videos more than 48 videos" do
+      49.times do
         Fabricate(:video, category: comedy)
       end
-      expect(comedy.recent_videos.count).to eq(6)
+      expect(comedy.recent_videos.count).to eq(48)
     end
 
-    it "returns all the video if there are less than six videos" do
+    it "returns all the video if there are less than 48 videos" do
       5.times do
         Fabricate(:video, category: comedy)
       end
@@ -37,7 +37,7 @@ describe Category do
     end
 
     it "returns the most recent videos" do
-      6.times do
+      48.times do
         Fabricate(:video, category: comedy)
       end
       last_video = Fabricate(:video, title: "last movie", description: "This is the last movie created.", category: comedy, created_at: 1.day.ago)
