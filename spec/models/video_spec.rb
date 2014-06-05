@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe Video do
 
+  let(:video) { Fabricate(:video) }
+  let(:bob) { Fabricate(:user) }
+  let(:alice) { Fabricate(:user) }
+  let(:joe) { Fabricate(:user) }
+
   it { should belong_to(:category) }
   it { should have_many(:reviews).order("created_at DESC").dependent(:destroy) }
   it { should have_many(:queue_items).dependent(:destroy) }
@@ -45,11 +50,6 @@ describe Video do
 
   describe "#calculate_average_rating" do
 
-    let(:video) { Fabricate(:video) }
-    let(:bob) { Fabricate(:user) }
-    let(:alice) { Fabricate(:user) }
-    let(:joe) { Fabricate(:user) }
-
     it "returns 0 if there are no ratings" do
       expect(video.calculate_average_rating).to eq(0)
     end
@@ -75,9 +75,10 @@ describe Video do
 
   describe "#update_average_rating" do
     it "updates the average_rating value in the db" do
-      video = Fabricate(:video)
-      Fabricate(:rating, video: video)
-      expect(video.average_rating).to eq(video.calculate_average_rating)
+      Fabricate(:rating, video: video, value: 1, user: bob)
+      Fabricate(:rating, video: video, value: 1, user: alice)
+      Fabricate(:rating, video: video, value: 2, user: joe)
+      expect(video.reload.average_rating).to eq(1.33)
     end
   end
 end

@@ -24,16 +24,17 @@ class Video < ActiveRecord::Base
   end
 
   def calculate_average_rating
+    reload
     if ratings.empty?
       return 0
     else
       average = 0
       ratings.each { |rating| average += rating.value }
-      (average /= ratings.count.to_f).round(2)
+      (average / ratings.count.to_f).round(2)
     end
   end
 
   def update_average_rating
-    update_attributes(average_rating: calculate_average_rating)
+    update_attribute(:average_rating, calculate_average_rating)
   end
 end
