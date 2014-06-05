@@ -3,6 +3,10 @@ class Video < ActiveRecord::Base
   has_many :reviews, order: 'created_at DESC', dependent: :destroy
   has_many :ratings, dependent: :destroy
   has_many :queue_items, dependent: :destroy
+  has_many :actor_roles, dependent: :destroy
+  has_many :actors, through: :actor_roles, source: :artist
+  has_many :creator_roles, dependent: :destroy
+  has_many :creators, through: :creator_roles, source: :artist
 
   mount_uploader :large_cover, LargeCoverUploader
   mount_uploader :small_cover, SmallCoverUploader
