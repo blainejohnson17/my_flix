@@ -5,7 +5,7 @@ u = User.create(full_name: "Blaine Johnson", email: "blainejohnson17@gmail.com",
 u.password = "password"
 u.save!
 
-file = File.join(Rails.root, 'db', 'videos_seed_test.yml')
+file = File.join(Rails.root, 'db', 'videos_seed.yml')
 categorized_videos = YAML::load(File.open(file))
 
 categorized_videos.each do |video|
