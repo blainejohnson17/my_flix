@@ -5,6 +5,10 @@ describe Video do
   it { should belong_to(:category) }
   it { should have_many(:reviews).order("created_at DESC").dependent(:destroy) }
   it { should have_many(:queue_items).dependent(:destroy) }
+  it { should have_many(:actor_roles).dependent(:destroy) }
+  it { should have_many(:actors).through(:actor_roles) }
+  it { should have_many(:creator_roles).dependent(:destroy) }
+  it { should have_many(:creators).through(:creator_roles) }
   it { should validate_presence_of(:title) }
   it { should validate_presence_of(:description) }
 
