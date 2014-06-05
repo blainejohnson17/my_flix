@@ -39,7 +39,7 @@ describe Video do
     end
   end
 
-  describe "#average_rating" do
+  describe "#calculate_average_rating" do
 
     let(:video) { Fabricate(:video) }
     let(:bob) { Fabricate(:user) }
@@ -47,25 +47,33 @@ describe Video do
     let(:joe) { Fabricate(:user) }
 
     it "returns 0 if there are no ratings" do
-      expect(video.average_rating).to eq(0)
+      expect(video.calculate_average_rating).to eq(0)
     end
 
     it "returns the rating when there is 1 review" do
       rating = Fabricate(:rating, video: video)
-      expect(video.average_rating).to eq(rating.value)
+      expect(video.calculate_average_rating).to eq(rating.value)
     end
 
     it "returns the average of all ratings when there are more than one reviews" do
       Fabricate(:rating, video: video, value: 2, user: bob)
       Fabricate(:rating, video: video, value: 3, user: alice)
-      expect(video.average_rating).to eq(2.5)
+      expect(video.reload.calculate_average_rating).to eq(2.5)
     end
 
     it "returns the average with up to 2 decimal places of precision" do
       Fabricate(:rating, video: video, value: 1, user: bob)
       Fabricate(:rating, video: video, value: 1, user: alice)
       Fabricate(:rating, video: video, value: 2, user: joe)
-      expect(video.average_rating).to eq(1.33)
+      expect(video.reload.calculate_average_rating).to eq(1.33)
+    end
+  end
+
+  describe "#update_average_rating" do
+    it "updates the average_rating value in the db" do
+      video = Fabricate(:video)
+      Fabricate(:rating, video: video)
+      expect(video.average_rating).to eq(video.calculate_average_rating)
     end
   end
 end
