@@ -6,4 +6,7 @@ class Rating < ActiveRecord::Base
   validates_numericality_of :value, only_integer: :true
   validates_inclusion_of :value, in: 1..5
   validates_uniqueness_of :video_id, scope: :user_id
+
+  after_save :update_average_rating
+  delegate :update_average_rating, to: :video
 end
