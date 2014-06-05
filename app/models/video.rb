@@ -28,4 +28,8 @@ class Video < ActiveRecord::Base
       (average /= ratings.count.to_f).round(2)
     end
   end
+
+  def update_average_rating
+    update_attributes(average_rating: calculate_average_rating)
+  end
 end
