@@ -11,10 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140318054144) do
+ActiveRecord::Schema.define(:version => 20140605175203) do
+
+  create_table "actor_roles", :force => true do |t|
+    t.integer  "video_id"
+    t.integer  "artist_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "artists", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "categories", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "creator_roles", :force => true do |t|
+    t.integer  "video_id"
+    t.integer  "artist_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -83,12 +103,16 @@ ActiveRecord::Schema.define(:version => 20140318054144) do
   create_table "videos", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "category_id"
     t.string   "large_cover"
     t.string   "small_cover"
     t.string   "video_url"
+    t.float    "average_rating", :default => 0.0
+    t.string   "year"
+    t.string   "cert_rating"
+    t.string   "duration"
   end
 
 end
