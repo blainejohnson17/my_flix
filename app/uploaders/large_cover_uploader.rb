@@ -7,7 +7,7 @@ class LargeCoverUploader < CarrierWave::Uploader::Base
     if Rails.env.test?
       "uploads/testing"
     else
-      "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+      "uploads/#{model.class.to_s.underscore}/#{model.id}/#{mounted_as}"
     end
   end
 end
