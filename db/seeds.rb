@@ -1,5 +1,6 @@
 Video.destroy_all
 Category.destroy_all
+Artist.destroy_all
 User.destroy_all
 u = User.create(full_name: "Blaine Johnson", email: "blainejohnson17@gmail.com", admin: true)
 u.password = "password"
