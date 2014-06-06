@@ -20,6 +20,7 @@ gem 'stripe'
 gem 'stripe_event'
 gem 'figaro'
 gem 'will_paginate', '~> 3.0.5'
+gem 'pg'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -28,7 +29,6 @@ group :assets do
 end
 
 group :development do
-  gem 'sqlite3'
   gem 'letter_opener'
 end
 
@@ -47,8 +47,4 @@ group :test do
   gem 'webmock', '1.15.2'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
-end
-
-group :production do
-  gem 'pg'
 end
