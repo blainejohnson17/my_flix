@@ -5,5 +5,5 @@
       Sort by:
       = select_tag(:video_sort, options_for_select([['Title: A - Z', 'title ASC'],['Title: Z - A', 'title DESC'],['Rating: High - Low', 'average_rating DESC'],['Rating: Low - High', 'average_rating ASC']], 1))
   %article.videos
-    = render partial: "videos", locals: { videos: @videos }
+    = render partial: "shared/videos", locals: { videos: @videos }
   = link_to '', category_path(page: @videos.next_page), class: 'load-more-videos', remote: true if @videos.next_page

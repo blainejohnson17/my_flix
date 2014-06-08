@@ -3,7 +3,7 @@
 - else
   $('a.load-more-videos').attr('href', '#{category_path page: @videos.next_page}');
 
-$('.videos').append('#{escape_javascript(render partial: "videos", :locals => { :videos => @videos })}');
+$('.videos').append('#{escape_javascript(render partial: "shared/videos", :locals => { :videos => @videos })}');
  
 - unless @videos.next_page
   $('a.load-more-videos').remove();
