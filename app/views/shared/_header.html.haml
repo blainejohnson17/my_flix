@@ -1,23 +1,25 @@
-.fixed_header_pad
-%section#top-header.row
-  %h1.span2
-    = link_to "MyFLiX", home_path
-  - if current_user
-    %ul.span4.clearfix
-      %li= link_to "Videos", home_path
-      %li= link_to "My Queue", my_queue_path
-      %li= link_to "People", people_path
-    = form_tag(search_videos_path, method: "get", class: 'span5, for-search') do
-      = text_field_tag(:term, nil, class: 'search_query', placeholder: 'Search for videos here')
-      = submit_tag("Search", class: 'button, btn')
-    #user_links.pull-right
-      %ul
-        %li.dropdown
-          %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
-            Welcome, #{current_user.full_name}
-            %b.caret
-          %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
-            %li
-              = link_to "Account", edit_user_path(current_user)
-              %a(href="#") Plan and Billing
-              = link_to "Sign Out", sign_out_path
+.navbar.navbar-fixed-top
+  .navbar-inner
+    %a.btn.btn-navbar{:data => {:toggle => 'collapse', :target => ".nav-collapse"}}
+      - 3.times do
+        %span.icon-bar
+    = link_to "MyFLiX", home_path, class: "brand"
+    - if current_user
+      .nav-collapse.collapse
+        %ul.nav
+          %li= link_to "Watch Instantly", home_path
+          %li= link_to "My Queue", my_queue_path
+          %li= link_to "People", people_path
+        .pull-right
+          = form_tag(search_videos_path, method: "get", class: 'navbar-search') do
+            = text_field_tag(:term, nil, class: 'search-query span3', placeholder: 'Search for videos here')
+          %ul#user_links.nav
+            %li.dropdown
+              %a(href="#" id="dlabel" role="button" data-toggle="dropdown" class="dropdown-toggle" data-target="#")
+                Welcome, #{current_user.full_name}
+                %b.caret
+              %ul.dropdown-menu(role="menu" aria-labelledby="dlabel")
+                %li
+                  = link_to "Account", edit_user_path(current_user)
+                  %a(href="#") Plan and Billing
+                  = link_to "Sign Out", sign_out_path

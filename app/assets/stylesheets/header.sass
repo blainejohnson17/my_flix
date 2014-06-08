@@ -1,56 +1,56 @@
-.fixed_header_pad
-  position: fixed
-  top: 0
-  left: 0
-  height: 20px
-  right: 0
-  background-color: #e1e1e1
-  z-index: 15
-section#top-header
-  position: fixed
-  z-index: 100
-  background: #B9090B
-  margin: 0
-  margin-bottom: 20px
-  padding: 12px 0
-  -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.7)
-  -moz-box-shadow: 0 0 3px rgba(0,0,0,0.7)
-  box-shadow: 0 0 3px rgba(0,0,0,0.7)
-  a
-    color: white
-  h1
-    font-size: 20px
-  > ul
-    padding-top: 12px
-    li
-      float: left
-      margin-right: 30px
-      text-transform: uppercase
-      &:first-of-type
-        margin-left: -15px
-  form
-    padding-top: 6px
-    margin: 0
-    input[type="text"]
-      width: 320px
-      float: left
-    input[type="submit"]
-      margin-left: 10px
-      float: left
-  #user_links
-    padding-top: 8px
-    > ul
-      > li
-        float: left
-        width: 200px
-        a
-          margin: 0 10px
-          b
-            border-top-color: white
-        > ul
-          > li
-            &.open &:hover
-              background: red
-            a
-              color: black
-              margin: 0
+.navbar
+  .navbar-inner
+    background-color: #B9090B
+    background-image: none
+    border: none
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,0.7)
+    -moz-box-shadow: 0 0 3px rgba(0,0,0,0.7)
+    box-shadow: 0 0 3px rgba(0,0,0,0.7)
+    a
+      color: white
+    .brand
+      font-size: 24px
+      padding: 22px 55px 29px
+    .nav > li > a
+      font: bold 17px arial
+      padding: 25px 10px 26px
+      color: white
+      text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5)
+    #user_links.nav
+      margin-right: 0
+      .dropdown
+        background-color: #d21702
+        border-left: 1px solid #e40704
+        height: 100%
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#d21702), to(#b9090b))
+        background-image: -webkit-linear-gradient(top, #d21702, #b9090b)
+        background-image: -moz-linear-gradient(top, #d21702, #b9090b)
+        background-image: -o-linear-gradient(top, #d21702, #b9090b)
+        background-image: -ms-linear-gradient(top, #d21702, #b9090b)
+        background-image: linear-gradient(top, #d21702, #b9090b)
+        cursor: pointer
+        &:hover
+          background-color: #e70604
+          background-image: -webkit-gradient(linear, left top, left bottom, from(#e70604), to(#c11b04))
+          background-image: -webkit-linear-gradient(top, #e70604, #c11b04)
+          background-image: -moz-linear-gradient(top, #e70604, #c11b04)
+          background-image: -o-linear-gradient(top, #e70604, #c11b04)
+          background-image: -ms-linear-gradient(top, #e70604, #c11b04)
+          background-image: linear-gradient(top, #e70604, #c11b04)
+        .dropdown-toggle > b.caret
+          border-top-color: white
+        .dropdown-menu li > a:hover, .dropdown-menu li > a:focus, .dropdown-submenu:hover > a
+          background: none
+        .dropdown-menu li > a
+          color: black
+      .dropdown.open > .dropdown-toggle
+        color: white
+        background-color: #e70604
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#e70604), to(#c11b04))
+        background-image: -webkit-linear-gradient(top, #e70604, #c11b04)
+        background-image: -moz-linear-gradient(top, #e70604, #c11b04)
+        background-image: -o-linear-gradient(top, #e70604, #c11b04)
+        background-image: -ms-linear-gradient(top, #e70604, #c11b04)
+        background-image: linear-gradient(top, #e70604, #c11b04)
+    form
+      padding: 15px 10px 21px
