@@ -23,3 +23,7 @@
                   = link_to "Account", edit_user_path(current_user)
                   %a(href="#") Plan and Billing
                   = link_to "Sign Out", sign_out_path
+    - else
+      .nav-collapse.collapse.pull-right
+        %ul.nav
+          %li= link_to "Sign In as Guest", sessions_path(email: 'guest@example.com', password: 'password'), method: :post
