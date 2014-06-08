@@ -1,6 +1,6 @@
 %article.video
   .container
-    .row
+    .row-fluid
       .video_large_cover.span7.offset1
         %img(src="#{@video.large_cover_url}")
       .video_info.span3
@@ -18,7 +18,7 @@
           = link_to "+ My Queue", queue_items_path(video_id: @video.id), method: :post, class: 'btn'
         
 %section.reviews.container
-  .row
+  .row-fluid
     .span10.offset1
       - if @review.new_record?
         = form_for [@video, Review.new] do |f|
@@ -35,7 +35,7 @@
       %ul
         - @reviews.each do |review|
           %article.review
-            %li.row
+            %li.row-fluid
               .span2
                 %div(class="rateit" data-rateit-value="#{review.rating}" data-rateit-readonly="true" data-rateit-ispreset="true") 
                 %p

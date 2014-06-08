@@ -1,7 +1,7 @@
 %article.video_category
   %header
     %h3= link_to "TV Commedies"
-  .videos.row
+  .videos.row-fluid
     - 6.times do
       .video.span2
         = link_to "", nil do
@@ -10,7 +10,7 @@
 %article.video_category
   %header
     %h3= link_to "TV Dramas"
-  .videos.row
+  .videos.row-fluid
     - 6.times do
       .video.span2
         %img(src="/tmp/#{['futurama', 'south_park', 'family_guy'].sample}.jpg")
@@ -18,7 +18,7 @@
 %article.video_category
   %header
     %h3= link_to "Reality TV"
-  .videos.row
+  .videos.row-fluid
     - 6.times do
       .video.span2
         %img(src="/tmp/#{['futurama', 'south_park', 'family_guy'].sample}.jpg")

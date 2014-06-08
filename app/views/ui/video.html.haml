@@ -1,6 +1,6 @@
 %article.video
   .container
-    .row
+    .row-fluid
       .video_large_cover.span7.offset1
         %img(src="http://dummyimage.com/665x375/000000/00a2ff")
       .video_info.span3
@@ -13,7 +13,7 @@
           %a.btn(href="") + My Queue
 
 %section.reviews.container
-  .row
+  .row-fluid
     .span10.offset1
       %form
         %fieldset
@@ -34,7 +34,7 @@
       %ul
         - 8.times do
           %article.review
-            %li.row
+            %li.row-fluid
               .span2
                 %span Rating: 5 / 5
                 %p by <a href="">John A. Zoidberg</a>
