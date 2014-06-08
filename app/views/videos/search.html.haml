@@ -1,6 +1,6 @@
-%article.video_category
-  .videos.row-fluid
-    - @videos.each do |video|
-      .video.span2
-        = link_to video do
-          %img(src="#{video.small_cover_url}")
+%section.search_results
+  %header.clearfix
+    %h1= "Search Results for: #{params[:term]}"
+  %article.videos
+    = render partial: "shared/videos", locals: { videos: @videos }
+  = link_to '', search_videos_path(term: params[:term], page: @videos.next_page), class: 'load-more-videos', remote: true if @videos.next_page

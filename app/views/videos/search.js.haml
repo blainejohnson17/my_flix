@@ -1,0 +1,9 @@
+- if params[:sort_by]
+  $('.videos').empty();
+- else
+  $('a.load-more-videos').attr('href', "#{search_videos_path(term: params[:term], page: @videos.next_page)}");
+
+$('.videos').append('#{escape_javascript(render partial: "shared/videos", :locals => { :videos => @videos })}');
+ 
+- unless @videos.next_page
+  $('a.load-more-videos').remove();

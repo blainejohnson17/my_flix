@@ -12,6 +12,10 @@ class VideosController < ApplicationController
   end
 
   def search
-    @videos = Video.search_by_title(params[:term])
+    @videos = Video.search_by_title(params[:term]).paginate(:page => params[:page])
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 end
