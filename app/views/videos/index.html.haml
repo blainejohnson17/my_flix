@@ -6,4 +6,4 @@
       - category.recent_videos.each do |video|
         .video
           = link_to video do
-            %img(src="#{video.small_cover_url}")
+            %img(data-lazy="#{video.small_cover_url}")
