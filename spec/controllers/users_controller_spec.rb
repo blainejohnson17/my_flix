@@ -106,25 +106,27 @@ describe UsersController do
 
   describe "GET #edit" do
 
-    it_behaves_like "sets user" do    
-      let(:user) { Fabricate(:user) }
+    let(:user) { Fabricate(:user) }
+
+    it_behaves_like "sets user" do
       let(:action) { get :edit, id: user.id }
     end
 
     it_behaves_like "requires owner" do
-      let(:action) { get :edit, id: Fabricate(:user).id }
+      let(:action) { get :edit, id: user.id}
     end
   end
 
   describe "PUT #update" do
 
+    let(:user) { Fabricate(:user) }
+
     it_behaves_like "sets user" do    
-      let(:user) { Fabricate(:user) }
       let(:action) { put :update, id: user.id, user: { email: "joe@example.com", full_name: "New Name", password: "secret" } }
     end
 
     it_behaves_like "requires owner" do
-      let(:action) { put :update, id: 1, user: { email: "joe@example.com", full_name: "New Name", password: "secret" } }
+      let(:action) { put :update, id: user.id, user: { email: "joe@example.com", full_name: "New Name", password: "secret" } }
     end
 
     context "with valid user info" do
